@@ -6,5 +6,5 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-sixtyfps = "0.1.1"
-clap = "3.0.6"
+slint = "0.2.0"
+clap = "3.0.14"
