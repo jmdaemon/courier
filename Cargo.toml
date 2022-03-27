@@ -10,10 +10,12 @@ slint = "0.2.1"
 clap = "3.0.14"
 log = "0.4.16"
 pretty_env_logger = "0.4.0"
-#imap = { git = "https://github.com/jonhoo/rust-imap", branch = "master", version = "3.0.0-alpha.6"}
 imap = "2.4.1"
 native-tls = "0.2.9"
 gtk = { version = "0.4.7", package = "gtk4", features = ["v4_6"]}
+gio = "0.15.10"
+toml = "0.5.8"
+anyhow = "1.0.56"
 
 [build-dependencies]
 slint-build = "0.2.1"

@@ -1,0 +1,4 @@
+
+emails = [
+    { host = "imap.gmail.com", username = "example.user@gmail.com", password="password", port = 993}
+]
