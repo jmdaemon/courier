@@ -10,3 +10,8 @@ slint = "0.2.0"
 clap = "3.0.14"
 log = "0.4.16"
 pretty_env_logger = "0.4.0"
+#imap = "2.4.1"
+#imap = "3.0.0-alpha-6"
+#imap = { git = "https://github.com/jonhoo/rust-imap", branch = "master", version = "3.0.0-alpha.6"}
+imap = "2.4.1"
+native-tls = "0.2.9"
