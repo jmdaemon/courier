@@ -13,6 +13,7 @@ pretty_env_logger = "0.4.0"
 #imap = { git = "https://github.com/jonhoo/rust-imap", branch = "master", version = "3.0.0-alpha.6"}
 imap = "2.4.1"
 native-tls = "0.2.9"
+gtk = { version = "0.4.7", package = "gtk4", features = ["v4_6"]}
 
 [build-dependencies]
 slint-build = "0.2.1"
