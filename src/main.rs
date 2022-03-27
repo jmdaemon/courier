@@ -5,7 +5,8 @@ use anyhow::Result;
 use toml::Value;
 use std::fs::read_to_string;
 
-use emails::email::fetch_inbox_top;
+use libcourier::emails::fetch_inbox_top;
+use libcourier::ui::{init_courier, run_app};
 
 fn main() -> Result<()> {
     pretty_env_logger::init();
@@ -63,34 +64,12 @@ fn main() -> Result<()> {
     info!("Password: {}", password);
     info!("Port: {}", port);
 
-    // GTK4 
-    let app = Application::builder()
-        .application_id("jmdaemon.github.io.courier")
-        .build();
-
-    // Connect to "activate" signal of `app`
-    app.connect_activate(build_ui);
-
-    // Accept command line arguments but don't do anything
-    // This is a temporary hack to be able to pass in command line arguments
-    // Run the application
-    app.run_with_args(&[host]);
+    // Initialize and run the app
+    let app = init_courier();
+    run_app(&app);
 
     let msg = fetch_inbox_top(host, username, password, port).unwrap().unwrap();
     println!("{}", msg);
 
     Ok(())
-}
-
-fn build_ui(app: &Application) {
-    // Create a window and set the title
-    let window = ApplicationWindow::builder()
-        .application(app)
-        .title("Courier")
-        .default_width(1920)
-        .default_height(1080)
-        .build();
-
-    // Present window
-    window.present();
 }

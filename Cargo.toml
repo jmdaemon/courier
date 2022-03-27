@@ -17,5 +17,5 @@ toml = "0.5.8"
 anyhow = "1.0.56"
 
 [lib]
-name = "emails"
-path = "src/emails/mod.rs"
+name = "libcourier"
+path = "src/lib.rs"
