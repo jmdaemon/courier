@@ -4,11 +4,12 @@ extern crate native_tls;
 use clap::{Arg, App, AppSettings};
 use log::{debug, error, info, warn};
 
+slint::include_modules!();
+
 fn fetch_inbox_top(host: &str, username: &str,
     password: &str, port: u16) -> imap::error::Result<Option<String>> {
 
     let tls = native_tls::TlsConnector::builder().build().unwrap();
-    //let client = imap::ClientBuilder::new(host, 993).native_tls()?;
     let client = imap::connect((host, port), host, &tls).unwrap();
 
     let mut imap_session = client
@@ -40,7 +41,6 @@ fn fetch_inbox_top(host: &str, username: &str,
 }
 
 fn main() -> Result<(), clap::Error> {
-    //env_logger::init();
     pretty_env_logger::init();
 
     let matches = App::new("Courier")
@@ -57,13 +57,14 @@ fn main() -> Result<(), clap::Error> {
     let host = matches.value_of("host").unwrap_or("imap.gmail.com");
     let username = matches.value_of("username").expect("Username not found.");
     let password = matches.value_of("password").expect("Password not found.");
-     let port = matches.value_of("port").unwrap_or("993").parse::<u16>().unwrap();
+    let port = matches.value_of("port").unwrap_or("993").parse::<u16>().unwrap();
     
     info!("Hostname: {}", host);
     info!("Username: {}", username);
     info!("Password: {}", password);
     info!("Port: {}", port);
 
+    Courier::new().run();
     let msg = fetch_inbox_top(host, username, password, port).unwrap().unwrap();
 
     println!("{}", msg);
