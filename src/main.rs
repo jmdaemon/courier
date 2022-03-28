@@ -4,29 +4,8 @@ use toml::Value;
 use std::fs::read_to_string;
 
 use libcourier::cli::init_cli;
-use libcourier::emails::fetch_inbox_top;
+use libcourier::emails::{Email, fetch_inbox_top, extract_msg};
 use libcourier::ui::{init_courier, run_app};
-
-#[derive(Default, Debug)]
-pub struct Email {
-    host: String,
-    username: String,
-    password: String,
-    port: u16
-}
-
-impl Email {
-    pub fn new_from_str(host: &str, username: &str, password: &str, port: u16) -> Email {
-        let host = host.to_string(); 
-        let username = username.to_string();
-        let password = password.to_string();
-        Email { host, username, password, port }
-    }
-
-    pub fn new(host: String, username: String, password: String, port: u16) -> Email {
-        Email { host, username, password, port }
-    }
-}
 
 pub fn parse_config(emailcfg: &Value, key: &str) -> String {
     emailcfg[key].as_str().expect(&format!("Could not parse {}", key)).to_string()
