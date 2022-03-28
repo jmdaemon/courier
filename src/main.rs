@@ -54,7 +54,7 @@ fn main() -> Result<()> {
     let app = init_courier();
     run_app(&app);
 
-    let msg = fetch_inbox_top(&email.host, &email.username, &email.password, email.port).unwrap().unwrap();
+    let msg = fetch_inbox_top(email).unwrap().unwrap();
     info!("{}", msg);
 
     Ok(())

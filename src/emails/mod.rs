@@ -56,14 +56,13 @@ pub fn fetch_inbox(email: Email, num_to_fetch: &str)
 }
 
 
-pub fn fetch_inbox_top(host: &str, username: &str,
-    password: &str, port: u16) -> imap::error::Result<Option<String>> {
-
+pub fn fetch_inbox_top(email:Email) -> imap::error::Result<Option<String>> {
     let tls = native_tls::TlsConnector::builder().build().unwrap();
-    let client = imap::connect((host, port), host, &tls).unwrap();
+    let host = email.host.as_str();
+    let client = imap::connect((host, email.port), host, &tls).unwrap();
 
     let mut imap_session = client
-        .login(username, password)
+        .login(email.username, email.password)
         .map_err(|e| e.0)?;
 
     // We want to fetch the first email in the INBOX mailbox
